@@ -1,0 +1,15 @@
+#Log
+logs
+*.logs
+
+FE_QLNS/node_modules/
+be_qlns/node_modules/
+
+
+
+FE_QLNS/.env
+be_qlns/.env
+
+.DS_Store
+
+
