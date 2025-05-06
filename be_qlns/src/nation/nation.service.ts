@@ -20,7 +20,7 @@ export class NationService {
     return new BaseResponseDTO(200, 'Get all nations success', nations);
   }
 
-  async getNation(id: string): Promise<BaseResponseDTO<Nation | null>> {
+  async getNationbyID(id: string): Promise<BaseResponseDTO<Nation | null>> {
     const nation = await this.nationModel.findById(id);
     if (!nation) return errorResponse('Nation not found', 404);
     return new BaseResponseDTO(200, 'Get nation success', nation);
@@ -54,5 +54,11 @@ export class NationService {
       'Nation updated successfully',
       updatedNation,
     );
+  }
+
+  async deleteNation(id: string): Promise<BaseResponseDTO<Nation | null>> {
+    const nation = await this.nationModel.findByIdAndDelete(id);
+    if (!nation) return errorResponse('Nation not found', 404);
+    return new BaseResponseDTO(200, 'Delete success', nation);
   }
 }

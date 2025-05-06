@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   Param,
@@ -36,10 +37,11 @@ export class NationController {
   @UseGuards(AuthGuard('jwt'), new RolesGuard(['admin']))
   @HttpCode(200)
   @Get('/get-nation/:id')
-  getNation(@Param('id') id: string): Promise<BaseResponseDTO<Nation | null>> { 
-    return this.nationService.getNation(id);
+  getNationbyID(
+    @Param('id') id: string,
+  ): Promise<BaseResponseDTO<Nation | null>> {
+    return this.nationService.getNationbyID(id);
   }
-
 
   @UseGuards(AuthGuard('jwt'), new RolesGuard(['admin']))
   @HttpCode(200)
@@ -58,5 +60,14 @@ export class NationController {
     @Param('id') id: string,
   ): Promise<BaseResponseDTO<Nation | null>> {
     return this.nationService.updateNation(body, id);
+  }
+
+  @UseGuards(AuthGuard('jwt'), new RolesGuard(['admin']))
+  @HttpCode(200)
+  @Delete('/delete/:id')
+  deleteNation(
+    @Param('id') id: string,
+  ): Promise<BaseResponseDTO<Nation | null>> {
+    return this.nationService.deleteNation(id);
   }
 }
